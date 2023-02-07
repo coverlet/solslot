@@ -5,7 +5,7 @@ import {
   SlotStatus,
 } from "./components/slot-machine/slot-machine";
 import { initVault, spin, collectWins } from "./core/transactions";
-import { checkIfWalletConnected } from "./core/wallet";
+import { checkIfWalletConnected, connectWallet } from "./core/wallet";
 
 import "./App.scss";
 window.Buffer = buffer.Buffer;
@@ -23,10 +23,6 @@ function App() {
     window.addEventListener("load", onLoad);
     return () => window.removeEventListener("load", onLoad);
   }, []);
-
-  function connectWallet() {
-    throw new Error("Function not implemented.");
-  }
 
   const spinIt = () => {
     setStatus(SlotStatus.spin);
