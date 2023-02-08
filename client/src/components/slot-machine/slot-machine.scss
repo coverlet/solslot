@@ -16,6 +16,44 @@ $push-size: 180px;
     color: #fff;
     font-weight: bold;
     margin-top: 10px;
+    text-align: center;
+  }
+
+  .winning {
+    border-radius: 16px;
+    display: flex;
+    background-color: #eeeeeed6;
+    justify-content: space-evenly;
+    align-items: center;
+    box-shadow: inset 0px 0px 7px rgb(0 0 0);
+    height: 100%;
+    padding: 11px 34px;
+    font-weight: bold;
+  }
+
+
+  .utils {
+    display: flex;
+    justify-content: space-evenly;
+    flex: 1;
+    width: 80%;
+    margin-top: 16px;
+    flex-direction: column;
+  }
+
+  .collect-container {
+    width: 70%;
+    display: flex;
+    justify-content: center;
+    flex: 1;
+    padding: 4px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: #d02900;
+    border-bottom-left-radius: 22px;
+    border-bottom-right-radius: 22px;
+    margin-top: -2px;
   }
 
   .screen-container {
@@ -30,7 +68,6 @@ $push-size: 180px;
   }
 
   .buttons-container {
-    margin-top: 40px;
     margin-bottom: 20px;
     display: flex;
     flex-direction: column;

@@ -11,11 +11,11 @@ export enum SlotStatus {
   win3,
 }
 
-export const SlotMachine = ({ onSpin, status }: any): ReactElement => {
+export const SlotMachine = ({ onSpin, status, collect, winBalance, onSpinFinished }: any): ReactElement => {
   const [spin, setSpin] = useState(0);
   // const [target, setTarget] = useState(-1);
 
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState("YOU LOST");
 
   return (
     <div className="slot-machine">
@@ -23,6 +23,7 @@ export const SlotMachine = ({ onSpin, status }: any): ReactElement => {
         <SlotScreen
           spin={spin}
           onSpinFinished={() => {
+            onSpinFinished();
             switch (status) {
               case SlotStatus.spin:
                 setMessage("");
@@ -51,10 +52,19 @@ export const SlotMachine = ({ onSpin, status }: any): ReactElement => {
           status={status}
         />
       </div>
-      <div className="message">
-        {message}
+
+      <div className="collect-container">
+          <div className="winning">{winBalance}</div>
+          <button
+            className="button"
+            onClick={collect}
+          >
+            Collect
+          </button>
+        </div>
+      <div className="utils">
+        <div className="message">{message}</div>
       </div>
-      {/* {!collect && ( */}
       <div className="buttons-container">
         <button
           className="push--skeuo"
@@ -68,7 +78,6 @@ export const SlotMachine = ({ onSpin, status }: any): ReactElement => {
           SPIN
         </button>
       </div>
-      {/* )} */}
     </div>
   );
 };
