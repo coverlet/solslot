@@ -53,6 +53,10 @@ export const getBalance = async () => {
   const provider = getProvider();
   //@ts-ignore
   const program = new Program(idl, programID, provider);
+  if (!provider.publicKey) {
+    return { balance: "", winBalance: "" };
+  }
+
   let balance = await provider.connection
     .getBalance(provider.publicKey)
     .then(function (data) {
@@ -61,7 +65,7 @@ export const getBalance = async () => {
     })
     .catch(function (error) {
       console.log(error);
-      return '';
+      return "";
     });
 
   const [userVault, ubump] = await PublicKey.findProgramAddressSync(
@@ -76,8 +80,8 @@ export const getBalance = async () => {
     })
     .catch(function (error) {
       console.log(error);
-      return '';
+      return "";
     });
 
-  return  { balance, winBalance }
+  return { balance, winBalance };
 };

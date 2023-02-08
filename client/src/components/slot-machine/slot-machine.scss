@@ -11,6 +11,7 @@ $push-size: 180px;
   align-items: center;
 
   .message {
+    text-shadow: 0 0 1px #ffee67, 0 0 13px #ffed63;
     font-size: 26px;
     height: 30px;
     color: #fff;
@@ -30,7 +31,6 @@ $push-size: 180px;
     padding: 11px 34px;
     font-weight: bold;
   }
-
 
   .utils {
     display: flex;
@@ -96,7 +96,8 @@ $push-size: 180px;
 .push--skeuo {
   font-size: 36px;
   font-weight: bold;
-  color: #fff;
+  color: rgb(253 253 189);
+  text-shadow: 0 0 10px #ffee67, 0 0 21px #ffed63;
   position: relative;
   display: inline-block;
   width: $push-size;
@@ -107,7 +108,7 @@ $push-size: 180px;
   background-color: $push-color;
   border-radius: 50%;
   cursor: pointer;
-  transition: box-shadow 200ms;
+  transition: box-shadow 200ms, padding 200ms;
   box-shadow: inset 0 $push-size/24 0 lighten($push-color, 5%),
     inset 0 (-$push-size/24) $push-size/60 darken($push-color, 5%),
     0 0 $push-size/60 $push-color,
@@ -131,8 +132,10 @@ $push-size: 180px;
     0 $push-size/40 $push-size/20 rgba(0, 0, 0, 0.5);
 
   &:active,
-  // &:hover,
   &.is-pushed {
+    padding-top: 3px;
+    color: #38150f;
+    text-shadow: 1px 1px hsl(0deg 0% 100% / 52%), -1px -1px #444;
     box-shadow: inset 0 $push-size/24 0 lighten($push-color, 5%),
       inset 0 (-$push-size/24) $push-size/60 darken($push-color, 5%),
       0 0 $push-size/60 $push-color,

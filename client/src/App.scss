@@ -1,7 +1,7 @@
 .header {
   display: flex;
   justify-content: flex-end;
-  padding: 18px;
+  padding: 18px 18px 0;
   height: 40px;
   align-items: center;
   color: #fff;
@@ -17,10 +17,15 @@
   }
 }
 
+.logo {
+  display: flex;
+  justify-content: center;
+  margin-top: 3vh;
+}
+
 .slot-container {
   display: flex;
   justify-content: center;
-  margin-top: 8vh;
   flex-direction: column;
   align-items: center;
 }
@@ -28,4 +33,11 @@
 .collect-container {
   display: flex;
   justify-content: center;
+}
+
+.cluster {
+  color: #ffffff99;
+  font-size: 12px;
+  text-align: right;
+  padding: 8px 21px 0;
 }

@@ -1,4 +1,8 @@
-import { PublicKey } from "@solana/web3.js";
+import {
+  PublicKey,
+  Transaction,
+  TransactionInstruction,
+} from "@solana/web3.js";
 import { Program } from "@project-serum/anchor";
 import { getProvider } from "./conn";
 import { SystemProgram } from "@solana/web3.js";
@@ -15,10 +19,40 @@ export const spin = async () => {
     [Buffer.from("treasury")],
     program.programId
   );
+
+  console.log(`vault ${vault}`);
+
   const [userVault, ubump] = await PublicKey.findProgramAddressSync(
     [Buffer.from("uvault"), provider.wallet.publicKey.toBuffer()],
     program.programId
   );
+
+  let balance = await provider.connection
+    .getBalance(userVault)
+    .catch(function (error) {
+      return 0;
+    });
+
+  const instructions: TransactionInstruction[] = [];
+  let logLine = 2;
+
+  // initialize user`s vault
+  if (balance === 0) {
+    // if we init users vault, log line is 9
+    logLine = 9;
+    instructions.push(
+      await program.methods
+        .createUserVault()
+        .accounts({
+          userVault,
+          signer: provider.wallet.publicKey,
+          systemProgram: SystemProgram.programId,
+        })
+        .instruction()
+    );
+  }
+
+  // const transaction = new Transaction();
 
   return new Promise(async (resolve, reject) => {
     try {
@@ -30,8 +64,24 @@ export const spin = async () => {
           signer: provider.wallet.publicKey,
           systemProgram: SystemProgram.programId,
         })
+        .preInstructions(instructions)
         .rpc();
-      console.log(tx);
+      // instructions.push(
+      //   await program.methods
+      //     .spin()
+      //     .accounts({
+      //       vault,
+      //       userVault,
+      //       signer: provider.wallet.publicKey,
+      //       systemProgram: SystemProgram.programId,
+      //     })
+      //     .instruction()
+      // );
+
+      // transaction.add(...instructions);
+
+      // const signature = await provider.wallet.signTransaction(transaction);
+      // const result = await provider.connection.sendTransaction(signature);
 
       setTimeout(async () => {
         //@ts-ignore
@@ -39,13 +89,14 @@ export const spin = async () => {
           commitment: "confirmed",
         });
 
-        const logMessage = txLogs!.meta!.logMessages![2];
+        const logMessage = txLogs!.meta!.logMessages![logLine];
         const flipResult = logMessage.slice(-1);
         console.log(logMessage);
         console.log(flipResult);
         resolve(flipResult);
       }, 3000);
     } catch (error) {
+      console.log(error);
       resolve(0);
     }
   });

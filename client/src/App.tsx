@@ -14,6 +14,7 @@ import { ReactComponent as WalletSvg } from "./img/wallet.svg";
 
 import "./App.scss";
 import { formatAddress } from "./core/utils";
+import logo from './img/logo.png';
 window.Buffer = buffer.Buffer;
 
 function App() {
@@ -47,6 +48,19 @@ function App() {
 
   const spinIt = () => {
     setStatus(SlotStatus.spin);
+
+    // demo spin
+    if (!walletAddress) {
+      setTimeout(() => {
+        setStatus(
+          Math.floor(Math.random() * 2) === 0
+            ? SlotStatus.loose
+            : SlotStatus.win1
+        );
+      }, 2000);
+
+      return;
+    }
     spin().then((result) => {
       updateBalance(true);
       switch (result) {
@@ -80,18 +94,24 @@ function App() {
           <button
             className="button"
             onClick={() => {
-              connectWallet().then((res) => setWalletAdresss(res as string));
+              connectWallet().then((res) => {
+                setWalletAdresss(res as string);
+                updateBalance();
+              });
             }}
           >
-            Connect wallet
+            Connect Phantom Wallet
           </button>
         )}
       </div>
+      <div className="cluster">devnet</div>
+      <div className="logo"><img src={logo} alt="Logo"></img></div>
       <div className="slot-container">
         <SlotMachine
           onSpin={spinIt}
           status={status}
           winBalance={winBalance}
+          walletAddress={walletAddress}
           collect={() => {
             collectWins().then(() => {
               updateBalance();

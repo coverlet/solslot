@@ -11,11 +11,19 @@ export enum SlotStatus {
   win3,
 }
 
-export const SlotMachine = ({ onSpin, status, collect, winBalance, onSpinFinished }: any): ReactElement => {
+export const SlotMachine = ({
+  onSpin,
+  status,
+  collect,
+  winBalance,
+  onSpinFinished,
+  walletAddress,
+}: any): ReactElement => {
   const [spin, setSpin] = useState(0);
+  const [canSpin, setCanSpin] = useState(true);
   // const [target, setTarget] = useState(-1);
 
-  const [message, setMessage] = useState("YOU LOST");
+  const [message, setMessage] = useState("");
 
   return (
     <div className="slot-machine">
@@ -23,7 +31,13 @@ export const SlotMachine = ({ onSpin, status, collect, winBalance, onSpinFinishe
         <SlotScreen
           spin={spin}
           onSpinFinished={() => {
+            setCanSpin(true);
             onSpinFinished();
+
+            if (!walletAddress) {
+              setMessage("CONNECT WALLET");
+              return;
+            }
             switch (status) {
               case SlotStatus.spin:
                 setMessage("");
@@ -38,10 +52,10 @@ export const SlotMachine = ({ onSpin, status, collect, winBalance, onSpinFinishe
                 break;
 
               case SlotStatus.win2:
-                setMessage("WON 0.01");
+                setMessage("WON 0.1");
                 break;
               case SlotStatus.win3:
-                setMessage("WON 0.03");
+                setMessage("WON 0.2");
                 break;
 
               default:
@@ -54,25 +68,29 @@ export const SlotMachine = ({ onSpin, status, collect, winBalance, onSpinFinishe
       </div>
 
       <div className="collect-container">
-          <div className="winning">{winBalance}</div>
-          <button
-            className="button"
-            onClick={collect}
-          >
-            Collect
-          </button>
-        </div>
+        <div className="winning">{winBalance || " 0.00 "}</div>
+        <button className="button" onClick={collect}>
+          Collect
+        </button>
+      </div>
       <div className="utils">
         <div className="message">{message}</div>
       </div>
       <div className="buttons-container">
         <button
-          className="push--skeuo"
+          className={`push--skeuo ${!canSpin && "is-pushed"}`}
           onClick={() => {
-            // setStatus(SlotStatus.spin);
-            setMessage("");
+            if (!canSpin) {
+              return false;
+            }
+            setCanSpin(false);
             setSpin(spin + 1);
             onSpin();
+            if (!walletAddress) {
+              setMessage("CONNECT WALLET");
+            } else {
+              setMessage("");
+            }
           }}
         >
           SPIN
