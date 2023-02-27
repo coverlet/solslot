@@ -3,7 +3,7 @@ import {
   Transaction,
   TransactionInstruction,
 } from "@solana/web3.js";
-import { Program } from "@project-serum/anchor";
+import { Program, web3 as anchorWeb3 } from "@project-serum/anchor";
 import { getProvider } from "./conn";
 import { SystemProgram } from "@solana/web3.js";
 import idl from "../slots.json";
@@ -19,8 +19,6 @@ export const spin = async () => {
     [Buffer.from("treasury")],
     program.programId
   );
-
-  console.log(`vault ${vault}`);
 
   const [userVault, ubump] = await PublicKey.findProgramAddressSync(
     [Buffer.from("uvault"), provider.wallet.publicKey.toBuffer()],

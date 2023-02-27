@@ -1,0 +1,55 @@
+@keyframes pull {
+  0% {
+    transform: translateY(0) translateX(0) scale(1);
+  }
+
+  40% {
+    transform: translateY(120px) translateX(20px) scale(1.2);
+  }
+  100% {
+    transform: translateY(0) translateX(0) scale(1);
+  }
+}
+
+@keyframes pull-lever {
+  0% {
+    transform: scaleY(1) scaleX(1) translateX(0);
+  }
+
+  40% {
+    transform: scaleY(0.25) scaleX(1.8) translateX(6px);
+  }
+  100% {
+    transform: scaleY(1) scaleX(1) translateX(0);
+  }
+}
+
+.lever {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+
+  .bulb {
+    width: 50%;
+    position: relative;
+    right: -11px;
+    z-index: 6;
+    bottom: -4px;
+  }
+
+  .arm {
+    width: 50%;
+    transform-origin: bottom center;
+    z-index: 5;
+  }
+
+  &.pulled {
+    .bulb {
+      animation: 1s none 0s 1 normal pull;
+    }
+
+    .arm {
+      animation: 1s none 0s 1 normal pull-lever;
+    }
+  }
+}

@@ -57,10 +57,21 @@ export const getBalance = async () => {
     return { balance: "", winBalance: "" };
   }
 
+
+  let vaultBalance = await provider.connection
+    .getBalance(new PublicKey("DNifDbg6Mj2NrFWP31cUDTHt5mdqBAz7EHMwmY8ZAs9j"))
+    .then(function (data) {
+      return lamportsToSol(data).toFixed(2);
+    })
+    .catch(function (error) {
+      console.log(error);
+      return "";
+    });
+
   let balance = await provider.connection
     .getBalance(provider.publicKey)
     .then(function (data) {
-      console.log("Wallet Balance: " + lamportsToSol(data).toFixed(2));
+      console.log("Wallet balance: " + lamportsToSol(data).toFixed(2));
       return lamportsToSol(data).toFixed(2);
     })
     .catch(function (error) {
@@ -83,5 +94,5 @@ export const getBalance = async () => {
       return "";
     });
 
-  return { balance, winBalance };
+  return { balance, winBalance, vaultBalance };
 };

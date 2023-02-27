@@ -1,6 +1,7 @@
 import React, { ReactElement, useState } from "react";
 import "./slot-machine.scss";
 import { SlotScreen } from "../slot-screen/slot-screen";
+import { Lever } from "../lever/lever";
 
 export enum SlotStatus {
   none,
@@ -16,6 +17,7 @@ export const SlotMachine = ({
   status,
   collect,
   winBalance,
+  jackpot,
   onSpinFinished,
   walletAddress,
 }: any): ReactElement => {
@@ -48,14 +50,14 @@ export const SlotMachine = ({
                 break;
 
               case SlotStatus.win1:
-                setMessage("WON 0.05");
+                setMessage("WON ◎0.05");
                 break;
 
               case SlotStatus.win2:
-                setMessage("WON 0.1");
+                setMessage("WON ◎0.1");
                 break;
               case SlotStatus.win3:
-                setMessage("WON 0.2");
+                setMessage("WON ◎0.2");
                 break;
 
               default:
@@ -67,19 +69,10 @@ export const SlotMachine = ({
         />
       </div>
 
-      <div className="collect-container">
-        <div className="winning">{winBalance || " 0.00 "}</div>
-        <button className="button" onClick={collect}>
-          Collect
-        </button>
-      </div>
-      <div className="utils">
-        <div className="message">{message}</div>
-      </div>
-      <div className="buttons-container">
-        <button
-          className={`push--skeuo ${!canSpin && "is-pushed"}`}
-          onClick={() => {
+      <div className="jackpot">{jackpot && `◎${jackpot}`}</div>
+      <div className="lever-position">
+        <Lever
+          onSpin={() => {
             if (!canSpin) {
               return false;
             }
@@ -92,9 +85,16 @@ export const SlotMachine = ({
               setMessage("");
             }
           }}
-        >
-          SPIN
-        </button>
+        />
+      </div>
+      <div className="collect-container">
+        <div className="winning">{winBalance ? `◎${winBalance}` : "◎0.00 "}</div>
+        <div className="collect-button" onClick={collect}>
+          COLLECT
+        </div>
+      </div>
+      <div className="utils">
+        <div className="message">{message}</div>
       </div>
     </div>
   );

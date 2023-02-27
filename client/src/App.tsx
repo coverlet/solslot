@@ -14,14 +14,13 @@ import { ReactComponent as WalletSvg } from "./img/wallet.svg";
 
 import "./App.scss";
 import { formatAddress } from "./core/utils";
-import logo from './img/logo.png';
+import logo from "./img/logo.png";
 window.Buffer = buffer.Buffer;
 
 function App() {
   const [walletAddress, setWalletAdresss] = useState("");
-  const [Loding, setLoading] = useState(false);
   const [status, setStatus] = useState(SlotStatus.none);
-  const [collect, setCollect] = useState(false);
+  const [jackpot, setJackpot] = useState("");
   const [balance, setBalance] = useState("");
   const [winBalance, setWinBalance] = useState("");
 
@@ -42,6 +41,9 @@ function App() {
       res.balance && setBalance(res.balance);
       if (!onlyWallet) {
         res.winBalance && setWinBalance(res.winBalance);
+      }
+      if(res.vaultBalance) {
+        setJackpot(res.vaultBalance)
       }
     });
   };
@@ -105,22 +107,27 @@ function App() {
         )}
       </div>
       <div className="cluster">devnet</div>
-      <div className="logo"><img src={logo} alt="Logo"></img></div>
-      <div className="slot-container">
-        <SlotMachine
-          onSpin={spinIt}
-          status={status}
-          winBalance={winBalance}
-          walletAddress={walletAddress}
-          collect={() => {
-            collectWins().then(() => {
+      <div className="logo">
+        <img src={logo} alt="Logo"></img>
+      </div>
+      <div className="contaner-positioner">
+        <div className="slot-container">
+          <SlotMachine
+            onSpin={spinIt}
+            status={status}
+            winBalance={winBalance}
+            jackpot={jackpot}
+            walletAddress={walletAddress}
+            collect={() => {
+              collectWins().then(() => {
+                updateBalance();
+              });
+            }}
+            onSpinFinished={() => {
               updateBalance();
-            });
-          }}
-          onSpinFinished={() => {
-            updateBalance();
-          }}
-        />
+            }}
+          />
+        </div>
       </div>
     </div>
   );

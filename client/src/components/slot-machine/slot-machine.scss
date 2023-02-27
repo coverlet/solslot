@@ -6,9 +6,9 @@ $push-size: 180px;
 .slot-machine {
   display: flex;
   width: 500px;
-  justify-content: center;
   flex-direction: column;
   align-items: center;
+  position: relative;
 
   .message {
     text-shadow: 0 0 1px #ffee67, 0 0 13px #ffed63;
@@ -20,51 +20,78 @@ $push-size: 180px;
     text-align: center;
   }
 
-  .winning {
-    border-radius: 16px;
-    display: flex;
-    background-color: #eeeeeed6;
-    justify-content: space-evenly;
-    align-items: center;
-    box-shadow: inset 0px 0px 7px rgb(0 0 0);
-    height: 100%;
-    padding: 11px 34px;
+  .jackpot {
+    text-shadow: 0 0 1px #ffee67, 0 0 13px #ffed63;
+    font-size: 26px;
+    height: 30px;
+    color: #fff;
     font-weight: bold;
+    margin-top: 10px;
+    text-align: center;
+    position: absolute;
+    top: 72px;
+    margin-left: -15px;
   }
 
   .utils {
     display: flex;
     justify-content: space-evenly;
-    flex: 1;
-    width: 80%;
-    margin-top: 16px;
+    flex: 1 1;
+    width: 284px;
+    /* margin-top: 16px; */
     flex-direction: column;
+    /* background-color: #333333; */
+    top: 490px;
+    position: absolute;
+    margin-left: -10px;
   }
 
   .collect-container {
-    width: 70%;
+    position: absolute;
+    top: 408px;
+    // background-color: #44444466;
+    width: 282px;
     display: flex;
-    justify-content: center;
-    flex: 1;
-    padding: 4px;
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    background-color: #d02900;
-    border-bottom-left-radius: 22px;
-    border-bottom-right-radius: 22px;
-    margin-top: -2px;
+    height: 39px;
+    margin-left: -13px;
+  }
+
+  .winning {
+    height: 100%;
+    font-weight: bold;
+    width: 150px;
+    text-align: center;
+    line-height: 40px;
+  }
+
+  .collect-button {
+    font-weight: bold;
+    width: 150px;
+    text-align: center;
+    line-height: 40px;
+    color: #fff;
+    cursor: pointer;
+    &:hover {
+      text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff, 0 0 42px #0fa,
+        0 0 82px #0fa, 0 0 92px #0fa, 0 0 102px #0fa, 0 0 151px #0fa;
+    }
   }
 
   .screen-container {
-    background-image: url("/img/slotbg.png");
     background-size: contain;
     background-repeat: no-repeat;
-    padding: 36px;
-    border-radius: 44px;
-    box-shadow: 5px 11px 21px rgb(0 0 0 / 49%);
-    width: 348px;
-    height: 300px;
+    width: 277px;
+    height: 200px;
+    position: absolute;
+    z-index: -1;
+    margin-top: 168px;
+    margin-left: -21px;
+  }
+
+  .lever-position {
+    position: absolute;
+    right: 0;
+    top: 134px;
   }
 
   .buttons-container {
@@ -90,95 +117,5 @@ $push-size: 180px;
         color: #fff;
       }
     }
-  }
-}
-
-.push--skeuo {
-  font-size: 36px;
-  font-weight: bold;
-  color: rgb(253 253 189);
-  text-shadow: 0 0 10px #ffee67, 0 0 21px #ffed63;
-  position: relative;
-  display: inline-block;
-  width: $push-size;
-  height: $push-size;
-  border: 0;
-  margin: 1em;
-  outline: none;
-  background-color: $push-color;
-  border-radius: 50%;
-  cursor: pointer;
-  transition: box-shadow 200ms, padding 200ms;
-  box-shadow: inset 0 $push-size/24 0 lighten($push-color, 5%),
-    inset 0 (-$push-size/24) $push-size/60 darken($push-color, 5%),
-    0 0 $push-size/60 $push-color,
-    inset 0 0 $push-size/30 darken($push-color, 15%),
-    inset 0 0 $push-size/30 transparentize($bg, 0.5),
-    inset 0 0 $push-size/60 $push-size/12 $push-color,
-    inset 0 (-$push-size/30) $push-size/40 $push-size/10
-      transparentize($bg, 0.3),
-    inset 0 0 $push-size/60 $push-size/10 darken($push-color, 20%),
-    inset 0 0 $push-size/60 $push-size/10 transparentize($bg, 0.3),
-    inset 0 0 $push-size/120 $push-size/9.2 darken($push-color, 50%),
-    inset 0 0 $push-size/120 $push-size/8
-      transparentize(lighten($push-color, 30%), 0.3),
-    inset 0 $push-size/20 0 $push-size/8.5
-      transparentize(lighten($push-color, 15%), 0.3),
-    inset 0 (-$push-size/20) $push-size/60 $push-size/8.5
-      transparentize(darken($push-color, 10%), 0.8),
-    inset 0 0 0 $push-size/5.5 $push-color,
-    inset 0 $push-size/2.5 $push-size/7.5 darken($push-color, 5%),
-    inset 0 0 $push-size/10 $push-size/6 darken($push-color, 10%),
-    0 $push-size/40 $push-size/20 rgba(0, 0, 0, 0.5);
-
-  &:active,
-  &.is-pushed {
-    padding-top: 3px;
-    color: #38150f;
-    text-shadow: 1px 1px hsl(0deg 0% 100% / 52%), -1px -1px #444;
-    box-shadow: inset 0 $push-size/24 0 lighten($push-color, 5%),
-      inset 0 (-$push-size/24) $push-size/60 darken($push-color, 5%),
-      0 0 $push-size/60 $push-color,
-      inset 0 0 $push-size/30 darken($push-color, 15%),
-      inset 0 0 $push-size/30 transparentize($bg, 0.5),
-      inset 0 0 $push-size/60 $push-size/12 $push-color,
-      inset 0 (-$push-size/30) $push-size/40 $push-size/10
-        transparentize($bg, 0.3),
-      inset 0 0 $push-size/60 $push-size/10 darken($push-color, 20%),
-      inset 0 0 $push-size/60 $push-size/10 transparentize($bg, 0.3),
-      inset 0 0 $push-size/40 $push-size/8.5 darken($push-color, 40%),
-      inset 0 0 $push-size/120 $push-size/7.5
-        transparentize(lighten($push-color, 30%), 0.8),
-      inset 0 $push-size/20 0 28px
-        transparentize(lighten($push-color, 15%), 0.5),
-      inset 0 (-$push-size/20) $push-size/60 28px
-        transparentize(darken($push-color, 20%), 0.8),
-      inset 0 0 0 $push-size/5.5 darken($push-color, 3%),
-      inset 0 $push-size/2.5 $push-size/7.5 darken($push-color, 8%),
-      inset 0 0 $push-size/10 $push-size/6 darken($push-color, 15%),
-      0 $push-size/40 $push-size/20 rgba(0, 0, 0, 0.5);
-    background-color: darken($push-color, 2%);
-
-    &:before {
-      opacity: 0.5;
-    }
-  }
-
-  &:before {
-    content: "";
-    position: absolute;
-    bottom: $push-size/4.5;
-    left: $push-size/3.6;
-    display: block;
-    width: $push-size/2.2;
-    height: $push-size/3.3;
-    background: transparentize(lighten($push-color, 30%), 0.8);
-    background: linear-gradient(
-      to top,
-      transparentize(lighten($push-color, 40%), 0.7) 0%,
-      transparentize($push-color, 0.9) 100%
-    );
-    border-radius: 40% 40% 60% 60%;
-    transition: opacity 200ms;
   }
 }

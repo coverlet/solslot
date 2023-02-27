@@ -21,13 +21,28 @@
   display: flex;
   justify-content: center;
   margin-top: 3vh;
+  height: 160px;
 }
 
 .slot-container {
+  background-image: url("/img/machine.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
   display: flex;
-  justify-content: center;
+  // justify-content: center;
   flex-direction: column;
   align-items: center;
+  height: 610px;
+  width: 800px;
+  min-width: 800px;
+}
+
+.contaner-positioner {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  z-index: 10;
 }
 
 .collect-container {

@@ -7,6 +7,7 @@
   box-sizing: border-box;
   position: relative;
   overflow: hidden;
+  background-color: #f2f2f2;
 
   .reel-container {
     position: relative;
@@ -17,9 +18,10 @@
     content: "";
     position: absolute;
     left: 0;
-    width: 120px;
+    width: 91px;
     height: 60px;
     z-index: 10;
+    top: 6px;
   } 
 
   > ::after {
@@ -27,19 +29,20 @@
     content: "";
     position: absolute;
     left: 0;
-    width: 120px;
+    width: 91px;
     height: 60px;
-    bottom: 0px;
+    bottom: 30px;
     z-index: 10;
   }
 
   .wheel {
-    height: 1200px;
-    width: 120px;
+    height: 800px;
+    width: 80px;
     position: absolute;
     z-index: 1;
     background-image: url("/img/reel.png");
     overflow: hidden;
+    margin-left: 8px;
 
     &.w1 {
       top: -30px;
@@ -53,10 +56,10 @@
       background-position: 0px 0px;
     }
     &.wheel2 {
-      background-position: -120px 0px;
+      background-position: -80px 0px;
     }
     &.wheel3 {
-      background-position: -240px 0px;
+      background-position: -160px 0px;
     }
   }
 }
