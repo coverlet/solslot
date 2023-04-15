@@ -26,7 +26,7 @@ The smart contract was written using Anchor framework and has the following meth
 The client side is written in React and uses anchor client library.
 
 ### Disclaimer
-This project was built for [Encode Solana Hackaton](https://www.encode.club/encode-solana-hackathon), but its main purpose was for us to learn cool thins while developing on Solana ecosystem. Although it can be used as a learning tool for a beginner, it is far from best practices and probably a lot of things could be done in a better way. We have cut many corners:
+This project was built to learn cool things while developing on Solana ecosystem. Although it can be used as a learning tool for a beginner, it is far from best practices and probably a lot of things could be done in a better way. We have cut many corners:
 - not really random (see below)
 - no program exception handling
 - known bugs and glitches on the frontend app
